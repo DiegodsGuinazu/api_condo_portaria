@@ -13,8 +13,8 @@ data class Usuario(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    val id: Long,
+    val id: Long?,
     @Column(unique = true)
-    val email: String,
-    val senha: String
+    var email: String,
+    var senha: String
 )
