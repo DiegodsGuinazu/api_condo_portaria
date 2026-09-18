@@ -16,5 +16,5 @@ data class Usuario(
     val id: Long,
     @Column(unique = true)
     val email: String,
-    val seha: String
+    val senha: String
 )
