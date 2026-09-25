@@ -1,19 +1,23 @@
-# Etapa 1: Construção da aplicação
-FROM maven:3.9-eclipse-temurin-21 AS build
+FROM eclipse-temurin:21-jdk AS build
 
 WORKDIR /app
 
-COPY pom.xml .
+COPY gradlew .
+COPY gradle ./gradle
+COPY build.gradle.kts .
+COPY settings.gradle.kts .
 
 COPY src ./src
 
-RUN mvn clean package -DskipTests
+RUN chmod +x gradlew
+
+RUN ./gradlew clean bootJar --no-daemon
 
 
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/build/libs/*.jar app.jar
 
 CMD ["java", "-jar", "app.jar"]
