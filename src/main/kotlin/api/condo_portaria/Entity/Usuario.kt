@@ -15,6 +15,7 @@ data class Usuario(
 
     val id: Long?,
     @Column(unique = true)
+    var nome: String,
     var email: String,
     var senha: String
 )

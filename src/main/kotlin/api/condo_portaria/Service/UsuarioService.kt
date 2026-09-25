@@ -26,6 +26,7 @@ class UsuarioService (val repository : UsuarioRepository){
     fun atualizar(id : Long, usuario: Usuario) : Usuario?{
 
         var usuarioExistente = repository.findById(id).orElse(null) ?: return null
+        usuarioExistente.nome = usuario.nome
         usuarioExistente.email = usuario.email
         usuarioExistente.senha = usuario.senha
         return repository.save(usuarioExistente)
